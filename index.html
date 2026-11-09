@@ -169,8 +169,9 @@ main:focus { outline: none; }
   .js .nav-toggle { display: inline-flex; }
   .js .site-nav {
     position: absolute; top: 100%; left: 0; right: 0;
-    background: rgba(7, 9, 22, 0.98); border-bottom: 1px solid var(--border);
+    background: #070916; border-bottom: 1px solid var(--border);
     padding: 8px var(--gutter) 20px; display: none;
+    max-height: calc(100dvh - var(--header-h)); overflow-y: auto;
   }
   .js .site-nav.is-open { display: block; }
   .js .site-nav ul { flex-direction: column; gap: 2px; }
@@ -369,15 +370,6 @@ main:focus { outline: none; }
 .logo-box { flex: none; width: 52px; height: 52px; border-radius: 14px; overflow: hidden; background: #fff; display: grid; place-items: center; }
 .logo-box img { width: 100%; height: 100%; object-fit: contain; }
 .logo-box--text { background: rgba(167,150,255,.15); color: #d6ceff; font-weight: 800; font-size: .95rem; border: 1px solid rgba(167,150,255,.3); }
-
-.cta {
-  display: flex; align-items: center; justify-content: space-between; gap: 20px 32px; flex-wrap: wrap;
-  padding: clamp(24px, 4vw, 44px); border-radius: calc(var(--radius) + 6px);
-  background: radial-gradient(120% 140% at 100% 0%, rgba(167,150,255,.18), transparent 50%), var(--surface);
-  border: 1px solid var(--border-strong);
-}
-.cta p { color: var(--text-2); }
-.cta .section-title { margin-bottom: 6px; }
 
 /* ---------- Sobre ---------- */
 
@@ -628,6 +620,92 @@ a.contact-links__item:hover { color: var(--cyan); }
 .error-page .empty { border: 0; padding-bottom: 8px; }
 .error-page p:last-child { margin-top: 28px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
+/* ---------- Ajustes para tablet e celular ---------- */
+
+@media (max-width: 999px) {
+  .facts, .facts--row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts__wide { grid-column: 1 / -1; }
+}
+
+@media (max-width: 899px) {
+  .filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .filters .field--search, .filters__actions { grid-column: 1 / -1; }
+  .filters__actions .btn { flex: 1; }
+}
+
+@media (max-width: 640px) {
+  :root { --header-h: 60px; }
+  body { font-size: 1rem; }
+  .brand { min-height: 44px; }
+  h1, h2, h3 { overflow-wrap: break-word; }
+
+  .section { padding-bottom: 44px; }
+  .section:not(.section--tight) { padding-top: 44px; }
+  .section-head { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 18px; }
+  .link-arrow { min-height: 44px; }
+  .eyebrow { letter-spacing: .12em; }
+
+  .crumbs ol { margin-bottom: 8px; align-items: center; }
+  .crumbs a { display: inline-block; padding-block: 8px; }
+  .crumbs li:last-child:not(:first-child) { display: none; }
+
+  .hero { padding-top: 24px; }
+  .hero__actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 26px; }
+  .hero__actions .btn { padding-inline: .8em; }
+  .hero__actions .btn--primary { grid-column: 1 / -1; }
+
+  .about__photo { aspect-ratio: 1; max-width: none; }
+  .about__img { object-position: center 22%; }
+
+  .card__body { padding: 16px 18px 18px; }
+  .pub { padding: 16px 18px; }
+  .mini-item { padding: 14px; gap: 12px; }
+
+  .timeline { padding-left: 22px; gap: 14px; }
+  .timeline::before { left: 5px; }
+  .timeline__dot { left: -22px; top: 22px; width: 12px; height: 12px; }
+  .timeline__item.is-current .timeline__dot { box-shadow: 0 0 0 4px rgba(130,228,239,.15); }
+  .timeline__card { padding: 16px; gap: 14px; }
+  .timeline__head { gap: 12px; }
+  .timeline__head .logo-box { width: 44px; height: 44px; border-radius: 12px; }
+  .timeline__org a { min-height: 32px; }
+
+  .edu { padding: 16px; gap: 12px; }
+  .edu__icon { width: 40px; height: 40px; }
+  .edu-group + .edu-group { margin-top: 36px; }
+
+  .project__section { padding-bottom: 28px; margin-bottom: 28px; }
+  .project__layout { gap: 28px; }
+  .project__links .btn { flex: 1 1 100%; }
+  .facts { padding: 16px; }
+  .file__actions .btn { flex: 1; }
+
+  .contact-card { padding: 28px 18px 22px; }
+  .contact-links { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 0; width: 100%; margin-top: 20px; }
+  .contact-links li + li { border-top: 1px solid var(--border); }
+  .contact-links__item { display: flex; min-height: 50px; text-align: left; }
+  .contact-links__item > span { min-width: 0; }
+  .contact-links__out { margin-left: auto; }
+  .contact-card__action { width: 100%; margin-top: 18px; }
+
+  .site-footer .social { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+  .site-footer .social a { display: flex; justify-content: center; min-height: 44px; }
+  .to-top { min-height: 44px; }
+}
+
+@media (max-width: 999px) {
+  .facts > div { min-width: 0; }
+  .facts dd { overflow-wrap: anywhere; }
+}
+
+@media (max-width: 380px) {
+  .page-title { font-size: 1.6rem; }
+  .page-title--md { font-size: 1.4rem; }
+  .section-title { font-size: 1.4rem; }
+  .section-title--sm { font-size: 1.15rem; }
+  .hero__title { font-size: 2.2rem; }
+}
+
 /* ---------- Animações de entrada ---------- */
 
 @media (prefers-reduced-motion: no-preference) {
@@ -835,7 +913,9 @@ document.documentElement.classList.add('js');
         <p class="mini-item__meta">Presidente voluntário · nov. 2025 – atual</p></div>
         <span class="badge badge--current">Atual</span>
       </li><li class="mini-item" data-reveal>
-        <span class="logo-box logo-box--text" aria-hidden="true">GS</span>
+        <span class="logo-box"><img src="data:image/webp;base64,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" alt=""
+    width="1080" height="1080" loading="lazy" decoding="async"
+     ></span>
         <div><p class="mini-item__title">Guará Space (Empresa Júnior)</p>
         <p class="mini-item__meta">Diretor de Vendas e Marketing · jan. 2025 – set. 2025</p></div>
         
@@ -872,14 +952,6 @@ document.documentElement.classList.add('js');
   </li></ul>
   </div>
 </section>
-
-<section class="section" aria-labelledby="cta-contato--0">
-  <div class="container"><div class="cta" data-reveal>
-    <div><h2 class="section-title section-title--sm" id="cta-contato--0">Vamos conversar?</h2>
-    <p>Para parcerias, projetos, pesquisas ou convites, entre em contato.</p></div>
-    <a class="btn btn--primary" href="#/contato">Entrar em contato <svg class="icon" aria-hidden="true" focusable="false"><use href="#arrow-right"></use></svg></a>
-  </div></div>
-</section>
 </div>
 <div data-route="/sobre" data-title="Sobre mim · José Figueredo" hidden>
 
@@ -914,13 +986,6 @@ document.documentElement.classList.add('js');
   </div>
 </section>
 
-<section class="section" aria-labelledby="cta-contato--1">
-  <div class="container"><div class="cta" data-reveal>
-    <div><h2 class="section-title section-title--sm" id="cta-contato--1">Vamos conversar?</h2>
-    <p>Para parcerias, projetos, pesquisas ou convites, entre em contato.</p></div>
-    <a class="btn btn--primary" href="#/contato">Entrar em contato <svg class="icon" aria-hidden="true" focusable="false"><use href="#arrow-right"></use></svg></a>
-  </div></div>
-</section>
 </div>
 <div data-route="/experiencias" data-title="Experiências · José Figueredo" hidden>
 
@@ -992,7 +1057,9 @@ document.documentElement.classList.add('js');
     <span class="timeline__dot" aria-hidden="true"></span>
     <article class="timeline__card">
       <header class="timeline__head">
-        
+        <span class="logo-box"><img src="data:image/webp;base64,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" alt="Logotipo de Guará Space (Empresa Júnior)"
+    width="1080" height="1080" loading="lazy" decoding="async"
+     ></span>
         <div>
           <p class="timeline__meta">jan. 2025 – set. 2025 · Voluntariado </p>
           <h2 class="timeline__role">Diretor de Vendas e Marketing</h2>
@@ -1431,7 +1498,7 @@ document.documentElement.classList.add('js');
 
   <div class="container project__layout">
     <aside class="project__aside" aria-label="Ficha do projeto">
-      <dl class="facts"><div><dt>Situação</dt><dd>Em andamento</dd></div><div><dt>Tipo</dt><dd>Vinculado a organização</dd></div><div><dt>Período</dt><dd>2024</dd></div><div><dt>Organização</dt><dd>metasense</dd></div><div><dt>Área</dt><dd>Tecnologia</dd></div></dl>
+      <dl class="facts"><div ><dt>Situação</dt><dd>Em andamento</dd></div><div ><dt>Tipo</dt><dd>Vinculado a organização</dd></div><div ><dt>Período</dt><dd>2024</dd></div><div ><dt>Organização</dt><dd>metasense</dd></div><div ><dt>Área</dt><dd>Tecnologia</dd></div></dl>
       <nav class="toc" aria-label="Nesta página"><p class="toc__title">Nesta página</p><ol>
         <li><a href="#contexto--7">Contexto e problema</a></li><li><a href="#objetivo--7">Objetivo</a></li><li><a href="#processo--7">Processo de desenvolvimento e metodologia</a></li><li><a href="#tecnologias--7">Tecnologias e ferramentas</a></li><li><a href="#resultados--7">Resultados</a></li><li><a href="#aprendizados--7">Aprendizados</a></li><li><a href="#proximos-passos--7">Próximos passos</a></li></ol></nav>
     </aside>
@@ -1544,7 +1611,7 @@ document.documentElement.classList.add('js');
 
   <div class="container project__layout">
     <aside class="project__aside" aria-label="Ficha do projeto">
-      <dl class="facts"><div><dt>Situação</dt><dd>Concluído</dd></div><div><dt>Tipo</dt><dd>Projeto individual</dd></div><div><dt>Período</dt><dd>2026</dd></div><div><dt>Área</dt><dd>Tecnologia</dd></div></dl>
+      <dl class="facts"><div ><dt>Situação</dt><dd>Concluído</dd></div><div ><dt>Tipo</dt><dd>Projeto individual</dd></div><div ><dt>Período</dt><dd>2026</dd></div><div ><dt>Área</dt><dd>Tecnologia</dd></div></dl>
       <nav class="toc" aria-label="Nesta página"><p class="toc__title">Nesta página</p><ol>
         <li><a href="#contexto--8">Contexto e problema</a></li><li><a href="#objetivo--8">Objetivo</a></li><li><a href="#processo--8">Processo de desenvolvimento e metodologia</a></li><li><a href="#tecnologias--8">Tecnologias e ferramentas</a></li><li><a href="#resultados--8">Resultados</a></li><li><a href="#aprendizados--8">Aprendizados</a></li><li><a href="#proximos-passos--8">Próximos passos</a></li></ol></nav>
     </aside>
@@ -1665,7 +1732,7 @@ document.documentElement.classList.add('js');
 
   <div class="container project__layout">
     <aside class="project__aside" aria-label="Ficha do projeto">
-      <dl class="facts"><div><dt>Situação</dt><dd>Em andamento</dd></div><div><dt>Tipo</dt><dd>Vinculado a organização</dd></div><div><dt>Período</dt><dd>2026</dd></div><div><dt>Organização</dt><dd>Instituto Geração de Marte (IGM)</dd></div><div><dt>Área</dt><dd>Aeroespacial</dd></div></dl>
+      <dl class="facts"><div ><dt>Situação</dt><dd>Em andamento</dd></div><div ><dt>Tipo</dt><dd>Vinculado a organização</dd></div><div ><dt>Período</dt><dd>2026</dd></div><div class="facts__wide"><dt>Organização</dt><dd>Instituto Geração de Marte (IGM)</dd></div><div ><dt>Área</dt><dd>Aeroespacial</dd></div></dl>
       <nav class="toc" aria-label="Nesta página"><p class="toc__title">Nesta página</p><ol>
         <li><a href="#contexto--9">Contexto e problema</a></li><li><a href="#objetivo--9">Objetivo</a></li><li><a href="#processo--9">Processo de desenvolvimento e metodologia</a></li><li><a href="#tecnologias--9">Tecnologias e ferramentas</a></li><li><a href="#resultados--9">Resultados</a></li><li><a href="#aprendizados--9">Aprendizados</a></li><li><a href="#proximos-passos--9">Próximos passos</a></li></ol></nav>
     </aside>
@@ -1761,7 +1828,7 @@ document.documentElement.classList.add('js');
 
   <div class="container project__layout">
     <aside class="project__aside" aria-label="Ficha do projeto">
-      <dl class="facts"><div><dt>Situação</dt><dd>Em andamento</dd></div><div><dt>Tipo</dt><dd>Projeto individual</dd></div><div><dt>Período</dt><dd>2024</dd></div><div><dt>Área</dt><dd>Educação</dd></div></dl>
+      <dl class="facts"><div ><dt>Situação</dt><dd>Em andamento</dd></div><div ><dt>Tipo</dt><dd>Projeto individual</dd></div><div ><dt>Período</dt><dd>2024</dd></div><div ><dt>Área</dt><dd>Educação</dd></div></dl>
       <nav class="toc" aria-label="Nesta página"><p class="toc__title">Nesta página</p><ol>
         <li><a href="#contexto--10">Contexto e problema</a></li><li><a href="#objetivo--10">Objetivo</a></li><li><a href="#processo--10">Processo de desenvolvimento e metodologia</a></li><li><a href="#tecnologias--10">Tecnologias e ferramentas</a></li><li><a href="#aprendizados--10">Aprendizados</a></li><li><a href="#proximos-passos--10">Próximos passos</a></li></ol></nav>
     </aside>
@@ -1868,7 +1935,7 @@ document.documentElement.classList.add('js');
 
   <div class="container project__layout">
     <aside class="project__aside" aria-label="Ficha do projeto">
-      <dl class="facts"><div><dt>Situação</dt><dd>Concluído</dd></div><div><dt>Tipo</dt><dd>Vinculado a organização</dd></div><div><dt>Período</dt><dd>2026</dd></div><div><dt>Organização</dt><dd>metasense</dd></div><div><dt>Área</dt><dd>Empreendedorismo</dd></div></dl>
+      <dl class="facts"><div ><dt>Situação</dt><dd>Concluído</dd></div><div ><dt>Tipo</dt><dd>Vinculado a organização</dd></div><div ><dt>Período</dt><dd>2026</dd></div><div ><dt>Organização</dt><dd>metasense</dd></div><div ><dt>Área</dt><dd>Empreendedorismo</dd></div></dl>
       <nav class="toc" aria-label="Nesta página"><p class="toc__title">Nesta página</p><ol>
         <li><a href="#contexto--11">Contexto e problema</a></li><li><a href="#objetivo--11">Objetivo</a></li><li><a href="#processo--11">Processo de desenvolvimento e metodologia</a></li><li><a href="#tecnologias--11">Tecnologias e ferramentas</a></li><li><a href="#resultados--11">Resultados</a></li><li><a href="#aprendizados--11">Aprendizados</a></li><li><a href="#proximos-passos--11">Próximos passos</a></li></ol></nav>
     </aside>
@@ -1955,7 +2022,7 @@ document.documentElement.classList.add('js');
     </div>
   </header>
   <div class="container">
-    <dl class="facts facts--row" data-reveal><div><dt>Tipo</dt><dd>Artigo</dd></div><div><dt>Ano</dt><dd>2025</dd></div><div><dt>Evento ou periódico</dt><dd>Global Space Exploration Conference 2025</dd></div><div><dt>Autores</dt><dd>José Emanuel Figueredo Lopes Lacerda; Marco Mammoli</dd></div><div><dt>DOI</dt><dd>10.52202/080556-0025</dd></div></dl>
+    <dl class="facts facts--row" data-reveal><div ><dt>Tipo</dt><dd>Artigo</dd></div><div ><dt>Ano</dt><dd>2025</dd></div><div class="facts__wide"><dt>Evento ou periódico</dt><dd>Global Space Exploration Conference 2025</dd></div><div class="facts__wide"><dt>Autores</dt><dd>José Emanuel Figueredo Lopes Lacerda; Marco Mammoli</dd></div><div ><dt>DOI</dt><dd>10.52202/080556-0025</dd></div></dl>
     <section class="project__section" aria-labelledby="resumo--12" data-reveal><h2 class="section-title section-title--sm" id="resumo--12">Resumo</h2><div class="prose"><p>The thyroid is a gland located in the anterior region of the neck, whose hormones are essential for the development and maintenance of metabolic functions. Thyroid disorders are challenging to diagnose, as their symptoms are broad and often mistaken for those of other diseases. The aim of this research is to understand how thyroid conditions are impacted in microgravity environments and to present alternative technologies for monitoring thyroid hormones. In Brazil, approximately 15% of the population over the age of 45 suffers from thyroid dysfunctions, a public health issue aligned with SDG 3, which seeks to promote health and well-being by advancing the diagnosis and treatment of non-communicable diseases. During space missions, thyroid function can be significantly altered, especially in autoimmune cases such as Hashimoto's thyroiditis, which is the leading cause of hypothyroidism. This condition involves the progressive destruction of the thyroid by an autoimmune response, which may be exacerbated by microgravity.  Research indicates that microgravity alters the response to thyroid-stimulating hormone (TSH), impairing the production of T3 and T4. Changes in cell membrane structure and increased levels of proteins such as sphingomyelin synthase and Bax suggest that the space environment intensifies hypothyroidism by affecting the response to TSH. Through literature review and analysis of scientific articles on the subject, it has become evident that thyroid conditions negatively impact the health of individuals with such dysfunctions, with more pronounced effects in microgravity environments. Continuous and accurate monitoring of hormone levels is essential to maintain astronaut health on long-duration missions and aligns with SDG 9, fostering innovation in health monitoring technologies. Sensing technologies, such as implantable biosensors and wearable devices, emerge as promising solutions for non-invasive monitoring of these hormones, enabling immediate therapeutic adjustments and ensuring the balance needed to mitigate the adverse effects of microgravity on thyroid function. Additionally, the development of sustainable and reusable monitoring solutions supports responsible consumption (SDG 12) while advancing the technological frontier in healthcare, with implications for improved diagnostics on Earth. By exploring the intersection of health, innovation, and sustainability, this research contributes to a deeper understanding of thyroid health in extreme environments and aligns with global efforts to enhance health resilience and innovation under SDG 13.</p>
 </div></section>
     <section class="project__section" aria-labelledby="palavras--12" data-reveal><h2 class="section-title section-title--sm" id="palavras--12">Palavras-chave</h2><ul class="chips" aria-label="Palavras-chave"><li>thyroid</li><li>hypothyroidism</li><li>Hashimoto’s thyroiditis</li><li>microgravity</li><li>monitoring</li><li>biosensors</li></ul></section>
@@ -1996,7 +2063,7 @@ document.documentElement.classList.add('js');
     </div>
   </header>
   <div class="container">
-    <dl class="facts facts--row" data-reveal><div><dt>Tipo</dt><dd>Artigo</dd></div><div><dt>Ano</dt><dd>2025</dd></div><div><dt>Evento ou periódico</dt><dd>Global Space Exploration Conference 2025</dd></div><div><dt>Autores</dt><dd>Juliana Leonet; José Emanuel Figueredo Lopes Lacerda</dd></div></dl>
+    <dl class="facts facts--row" data-reveal><div ><dt>Tipo</dt><dd>Artigo</dd></div><div ><dt>Ano</dt><dd>2025</dd></div><div class="facts__wide"><dt>Evento ou periódico</dt><dd>Global Space Exploration Conference 2025</dd></div><div class="facts__wide"><dt>Autores</dt><dd>Juliana Leonet; José Emanuel Figueredo Lopes Lacerda</dd></div></dl>
     <section class="project__section" aria-labelledby="resumo--13" data-reveal><h2 class="section-title section-title--sm" id="resumo--13">Resumo</h2><div class="prose"><p>The Tech Life Flight mission, conducted by Geração de Marte (GM) in 2024, emerged as a groundbreaking project in microgravity science, focusing on empowering novices to develop life support solutions for astronauts. This initiative was executed through a space hackathon, which brought together industry experts to collaborate with emerging talents in addressing critical challenges associated with living in space. The objective of the hackathon was to facilitate collaboration between seasoned specialists in microgravity and newcomers to create practical, effective solutions for astronaut life support systems. The goal was not only to meet the needs of astronauts during extended missions but also to produce outcomes with tangible benefits for Earth. The success of the hackathon led to the development of five innovative proposals in human physiology and biotechnology, showcasing the synergy between expert knowledge and fresh perspectives. These solutions address key aspects of sustaining human life in microgravity environments, including self-sustainable nutrient production in microgravity, neurophysiology, metabolic imbalances, and bioimpression. The impact of these innovations extends beyond space missions, they offer applications in human health, such as solutions to physical and social problems in Brazil. This dual impact underscores the relevance of space research to solving terrestrial challenges and highlights the broader benefits of investing in space technology. The success of the Tech Life Flight mission also opens new opportunities for the growth of the private space sector in Brazil. By demonstrating the capability to generate impactful solutions through collaborative efforts, the mission paves the way for increased investment in Brazil’s burgeoning space industry. This aligns with GM's broader mission to promote the accessibility of space science and foster the development of new talent in the field. The Tech Life Flight mission exemplifies how strategic, collaborative events can advance scientific and technological progress in microgravity. By integrating expertise with innovative thinking, the hackathon has not only contributed to the field of space exploration but also provided practical benefits that could enhance life on Earth. This initiative highlights Brazil’s potential to make significant contributions to the global space community and encourages ongoing investment and development in space science and technology. In summary, the Tech Life Flight mission underscores the critical role of microgravity research and collaborative innovation in advancing both space exploration and practical applications. Through such initiatives, the future of space science and technology continues to be shaped by the combined efforts of experienced professionals and emerging talents.</p>
 </div></section>
     
@@ -2023,7 +2090,7 @@ document.documentElement.classList.add('js');
     </div>
   </header>
   <div class="container">
-    <dl class="facts facts--row" data-reveal><div><dt>Tipo</dt><dd>Apresentação em evento</dd></div><div><dt>Ano</dt><dd>2025</dd></div><div><dt>Evento ou periódico</dt><dd>Encontro Latino-Americano de Iniciação Científica (INIC) 2025 - Univap</dd></div><div><dt>Autores</dt><dd>Gabriel Matheus Dutra Santos; Ana Luiza Ribeiro do Carmo; Edward Silva Ferraz; Fiorella Lilian Villegas Yaranga; José Emanuel Figueredo Lopes Lacerda; Marco Mammoli</dd></div></dl>
+    <dl class="facts facts--row" data-reveal><div ><dt>Tipo</dt><dd>Apresentação em evento</dd></div><div ><dt>Ano</dt><dd>2025</dd></div><div class="facts__wide"><dt>Evento ou periódico</dt><dd>Encontro Latino-Americano de Iniciação Científica (INIC) 2025 - Univap</dd></div><div class="facts__wide"><dt>Autores</dt><dd>Gabriel Matheus Dutra Santos; Ana Luiza Ribeiro do Carmo; Edward Silva Ferraz; Fiorella Lilian Villegas Yaranga; José Emanuel Figueredo Lopes Lacerda; Marco Mammoli</dd></div></dl>
     <section class="project__section" aria-labelledby="resumo--14" data-reveal><h2 class="section-title section-title--sm" id="resumo--14">Resumo</h2><div class="prose"><p>O lema “Ninguém fica para trás”, central na Agenda 2030 da Organização das Nações Unidas (ONU), expressa a necessidade de alinhar ciência, tecnologia e inovação às demandas globais de sustentabilidade. Nesse contexto, a saúde espacial desponta como um campo estratégico que extrapola a fronteira da exploração do espaço, oferecendo soluções concretas para desafios enfrentados na Terra. O desenvolvimento de tecnologias para ambientes extremos representa avanços para missões espaciais e oportunidades de aplicação em cenários terrestres. Atraves de revisão narrativa da literatura entre saúde espacial e os ODS, compreende-se como inovações originalmente pensadas para ambientes confinados, isolados e de recursos limitados podem inspirar políticas públicas e promover inclusão social. Dessa forma, a saúde espacial configura-se como um laboratório avançado para o desenvolvimento sustentável e para a melhoria da qualidade de vida em escala planetária.</p>
 </div></section>
     <section class="project__section" aria-labelledby="palavras--14" data-reveal><h2 class="section-title section-title--sm" id="palavras--14">Palavras-chave</h2><ul class="chips" aria-label="Palavras-chave"><li>saúde espacial</li><li>ODS</li><li>ambientes extremos</li></ul></section>
@@ -2050,7 +2117,7 @@ document.documentElement.classList.add('js');
     </div>
   </header>
   <div class="container">
-    <dl class="facts facts--row" data-reveal><div><dt>Tipo</dt><dd>Apresentação em evento</dd></div><div><dt>Ano</dt><dd>2025</dd></div><div><dt>Evento ou periódico</dt><dd>Encontro Latino-Americano de Iniciação Científica (INIC) 2025 - Univap</dd></div><div><dt>Autores</dt><dd>Nataly Sousa Assis, Roger Pinheiro Presoti, Saynara de Sousa da Silva, Witney Karen Moraes Costa, José Emanuel Figueredo Lopes Lacerda</dd></div></dl>
+    <dl class="facts facts--row" data-reveal><div ><dt>Tipo</dt><dd>Apresentação em evento</dd></div><div ><dt>Ano</dt><dd>2025</dd></div><div class="facts__wide"><dt>Evento ou periódico</dt><dd>Encontro Latino-Americano de Iniciação Científica (INIC) 2025 - Univap</dd></div><div class="facts__wide"><dt>Autores</dt><dd>Nataly Sousa Assis, Roger Pinheiro Presoti, Saynara de Sousa da Silva, Witney Karen Moraes Costa, José Emanuel Figueredo Lopes Lacerda</dd></div></dl>
     <section class="project__section" aria-labelledby="resumo--15" data-reveal><h2 class="section-title section-title--sm" id="resumo--15">Resumo</h2><div class="prose"><p>Este artigo analisa como modelos educacionais inovadores, baseados em metodologias ativas e tecnologias digitais, podem contribuir para a redução das desigualdades sociais e educacionais no Brasil. O estudo parte do pressuposto de que o uso pedagógico das Tecnologias Digitais de Informação e Comunicação (TDICs), aliado a metodologias centradas no estudante, pode gerar maior engajamento, autonomia e qualidade no processo de aprendizagem. A pesquisa, de natureza bibliográfica e qualitativa, analisou estudos recentes sobre exclusão digital, políticas públicas, formação docente e competências digitais. Os resultados indicam que a mera introdução da tecnologia não é suficiente: são necessários investimentos em infraestrutura, capacitação de professores e políticas públicas integradas. Conclui-se que as tecnologias educacionais, quando bem aplicadas, têm o potencial de transformar práticas pedagógicas tradicionais e ampliar as oportunidades de aprendizagem.</p>
 </div></section>
     <section class="project__section" aria-labelledby="palavras--15" data-reveal><h2 class="section-title section-title--sm" id="palavras--15">Palavras-chave</h2><ul class="chips" aria-label="Palavras-chave"><li>inclusão digital</li><li>metodologias ativas</li><li>políticas educacionais</li><li>tecnologia educacional</li></ul></section>
@@ -2077,7 +2144,7 @@ document.documentElement.classList.add('js');
     </div>
   </header>
   <div class="container">
-    <dl class="facts facts--row" data-reveal><div><dt>Tipo</dt><dd>Artigo</dd></div><div><dt>Ano</dt><dd>2025</dd></div><div><dt>Evento ou periódico</dt><dd>Revista Ibero-Americana de Humanidades, Ciências e Educação</dd></div><div><dt>Autores</dt><dd>José Emanuel Figueredo Lopes Lacerda; Nátaly Sousa Assis; Witney Karen Moraes Costa; Maira Silva Ferreira; Jemmla Meira Trindade Moreira; Raquel Maria Trindade Fernandes</dd></div><div><dt>DOI</dt><dd>10.51891/rease.v12i2.24458</dd></div></dl>
+    <dl class="facts facts--row" data-reveal><div ><dt>Tipo</dt><dd>Artigo</dd></div><div ><dt>Ano</dt><dd>2025</dd></div><div class="facts__wide"><dt>Evento ou periódico</dt><dd>Revista Ibero-Americana de Humanidades, Ciências e Educação</dd></div><div class="facts__wide"><dt>Autores</dt><dd>José Emanuel Figueredo Lopes Lacerda; Nátaly Sousa Assis; Witney Karen Moraes Costa; Maira Silva Ferreira; Jemmla Meira Trindade Moreira; Raquel Maria Trindade Fernandes</dd></div><div ><dt>DOI</dt><dd>10.51891/rease.v12i2.24458</dd></div></dl>
     <section class="project__section" aria-labelledby="resumo--16" data-reveal><h2 class="section-title section-title--sm" id="resumo--16">Resumo</h2><div class="prose"><p>Esse artigo buscou investigar os fatores que possivelmente contribuem para os altos índices de retenção na disciplina de Química Geral e Inorgânica no BICT/UFMA. A partir da análise de dados institucionais e de um questionário aplicado a discentes reprovados, foram identificados como principais causas: dificuldades com o conteúdo, acúmulo de disciplinas, baixa adesão a estratégias de apoio, entre outros. Esta análise preliminar poderá guiar docentes, discentes e instituição na elaboração de estratégias para mudar essa realidade.</p>
 </div></section>
     <section class="project__section" aria-labelledby="palavras--16" data-reveal><h2 class="section-title section-title--sm" id="palavras--16">Palavras-chave</h2><ul class="chips" aria-label="Palavras-chave"><li>ensino de química</li><li>alto índice de reprovação</li><li>BICT/UFMA.</li></ul></section>
@@ -2104,7 +2171,7 @@ document.documentElement.classList.add('js');
     </div>
   </header>
   <div class="container">
-    <dl class="facts facts--row" data-reveal><div><dt>Tipo</dt><dd>Artigo</dd></div><div><dt>Ano</dt><dd>2025</dd></div><div><dt>Evento ou periódico</dt><dd>3º Congresso Aeroespacial Brasileiro</dd></div><div><dt>Autores</dt><dd>Roger Pinheiro Presoti; José Emanuel Figueredo Lopes Lacerda</dd></div><div><dt>DOI</dt><dd>10.29327/9786527220794.1443259</dd></div></dl>
+    <dl class="facts facts--row" data-reveal><div ><dt>Tipo</dt><dd>Artigo</dd></div><div ><dt>Ano</dt><dd>2025</dd></div><div class="facts__wide"><dt>Evento ou periódico</dt><dd>3º Congresso Aeroespacial Brasileiro</dd></div><div class="facts__wide"><dt>Autores</dt><dd>Roger Pinheiro Presoti; José Emanuel Figueredo Lopes Lacerda</dd></div><div class="facts__wide"><dt>DOI</dt><dd>10.29327/9786527220794.1443259</dd></div></dl>
     <section class="project__section" aria-labelledby="resumo--17" data-reveal><h2 class="section-title section-title--sm" id="resumo--17">Resumo</h2><div class="prose"><p>Microgravity research has become one of the strategic frontiers for global scientific and technological advancement. In Brazil, this field has been gaining prominence, particularly within academic and educational contexts, due to its potential to enable the investigation of physical and chemical phenomena in reduced gravity environments. Under such conditions, it becomes possible to conduct experiments that would be unfeasible under Earth's gravity, allowing significant progress in areas such as fluid dynamics, combustion, materials science, embedded electronics, and scientific instrumentation. This study aims to analyze and discuss the main Brazilian initiatives that enable the development of experiments in microgravity, with an emphasis on those related to education, youth engagement, and the popularization of space science. The methodology consisted of a bibliographic and documental review, through the analysis of technical reports, scientific publications, and institutional materials issued by organizations such as the Brazilian Space Agency (AEB), the Institute of Aeronautics and Space (IAE), and affiliated institutions. Among the highlighted programs is the Garatéa-ISS Project, which selects and sends student-designed experiments from Brazilian schools to the International Space Station (ISS), in collaboration with the Student Spaceflight Experiments Program (SSEP). Also addressed are suborbital research platforms based on the VS-30 and VS-50 rockets, operated by the IAE, which provide short-duration microgravity research opportunities. In addition, the AEB Escola program is examined for its role in disseminating aerospace culture in public educational institutions, contributing to the training of both teachers and students in spacerelated subjects. The analyzed data show that these initiatives have a positive impact on the consolidation of the Brazilian space sector, fostering scientific development, encouraging innovation, nurturing new talent, and strengthening scientific culture. These actions are directly aligned with the Sustainable Development Goals (SDGs), particularly SDG 4 (Quality Education), SDG 9 (Industry, Innovation, and Infrastructure), and SDG 17 (Partnerships for the Goals), reinforcing the role of microgravity as an integrative vector between science, technology, education, and social transformation in Brazil.</p>
 </div></section>
     <section class="project__section" aria-labelledby="palavras--17" data-reveal><h2 class="section-title section-title--sm" id="palavras--17">Palavras-chave</h2><ul class="chips" aria-label="Palavras-chave"><li>microgravity</li><li>space science</li><li>space outreach</li><li>educational projects</li><li>Sustainable Development Goals (SDGs)</li></ul></section>
@@ -2131,7 +2198,7 @@ document.documentElement.classList.add('js');
     </div>
   </header>
   <div class="container">
-    <dl class="facts facts--row" data-reveal><div><dt>Tipo</dt><dd>Artigo</dd></div><div><dt>Ano</dt><dd>2025</dd></div><div><dt>Evento ou periódico</dt><dd>76th International Astronautical Congress (IAC)</dd></div><div><dt>Autores</dt><dd>José Emanuel Figueredo Lopes Lacerda; Marco Mammoli</dd></div><div><dt>DOI</dt><dd>10.52202/083074-0126</dd></div></dl>
+    <dl class="facts facts--row" data-reveal><div ><dt>Tipo</dt><dd>Artigo</dd></div><div ><dt>Ano</dt><dd>2025</dd></div><div class="facts__wide"><dt>Evento ou periódico</dt><dd>76th International Astronautical Congress (IAC)</dd></div><div class="facts__wide"><dt>Autores</dt><dd>José Emanuel Figueredo Lopes Lacerda; Marco Mammoli</dd></div><div ><dt>DOI</dt><dd>10.52202/083074-0126</dd></div></dl>
     <section class="project__section" aria-labelledby="resumo--18" data-reveal><h2 class="section-title section-title--sm" id="resumo--18">Resumo</h2><div class="prose"><p>Maintaining endocrine health during long-duration space missions is a major challenge in space medicine, especially due to physiological changes induced by microgravity. The thyroid, essential for metabolism and cognition, is particularly sensitive in this context. This study proposes the design of an integrated system for continuous and non-invasive monitoring of thyroid hormones (T3, T4, and TSH) in space habitats. The solution combines wearable biosensors, artificial intelligence, and wireless communication to enable real-time data analysis, generating automatic alerts and clinical recommendations. The system aims to anticipate dysfunctions, guide personalized interventions, and reduce dependence on ground support. Beyond space applications, it is also suitable for remote terrestrial regions and digital health contexts. The proposed model contributes to the development of more resilient and sustainable space habitats, aligning with SDGs 3, 9, and 13, and offers potential for technology transfer to the biomedical sector.</p>
 </div></section>
     
@@ -2158,7 +2225,7 @@ document.documentElement.classList.add('js');
     </div>
   </header>
   <div class="container">
-    <dl class="facts facts--row" data-reveal><div><dt>Tipo</dt><dd>Artigo</dd></div><div><dt>Ano</dt><dd>2025</dd></div><div><dt>Evento ou periódico</dt><dd>76th International Astronautical Congress (IAC)</dd></div><div><dt>Autores</dt><dd>Reetunjai Dutta; José Emanuel Figueredo Lopes Lacerda; Wendy Lucia Sanchez Delgado</dd></div><div><dt>DOI</dt><dd>10.52202/083102-0052</dd></div></dl>
+    <dl class="facts facts--row" data-reveal><div ><dt>Tipo</dt><dd>Artigo</dd></div><div ><dt>Ano</dt><dd>2025</dd></div><div class="facts__wide"><dt>Evento ou periódico</dt><dd>76th International Astronautical Congress (IAC)</dd></div><div class="facts__wide"><dt>Autores</dt><dd>Reetunjai Dutta; José Emanuel Figueredo Lopes Lacerda; Wendy Lucia Sanchez Delgado</dd></div><div ><dt>DOI</dt><dd>10.52202/083102-0052</dd></div></dl>
     <section class="project__section" aria-labelledby="resumo--19" data-reveal><h2 class="section-title section-title--sm" id="resumo--19">Resumo</h2><div class="prose"><p>This study suggests a strategic model for democratization of space travel, making it easier to access a global medium-distance population with an average monthly income of around $500. It analyzes management partnerships between sectors such as space agencies, private companies, automobiles, energy, agriculture, and education. The results show that integrations such as SpaceX-Tesla and NASA-Chevron can have cheap economic impacts through technology transfer. Innovative revenue streams such as media content, digital collectibles, and branded products have been identified as financial mechanisms that support broader space access. This study concludes that expansion of the spatial economy relies on the creation of sustainable ecosystems that link traditional and spatial industries and allow for innovation, cost reductions and positive social impacts.</p>
 </div></section>
     
@@ -2240,7 +2307,7 @@ document.documentElement.classList.add('js');
     });
     view.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-visible'));
     if (scroll) {
-      scrollTo(0, 0);
+      scrollTo({ top: 0, behavior: 'instant' });
       document.getElementById('conteudo')?.focus({ preventScroll: true });
     }
   };
@@ -2297,6 +2364,7 @@ document.documentElement.classList.add('js');
       nav.classList.toggle('is-open', open);
       toggle.querySelector('.nav-toggle__label').textContent = open ? 'Fechar' : 'Menu';
     };
+    nav.addEventListener('click', (e) => e.target.closest('a') && setOpen(false));
     toggle.addEventListener('click', () => {
       const open = toggle.getAttribute('aria-expanded') !== 'true';
       setOpen(open);
