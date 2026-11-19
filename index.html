@@ -3719,6 +3719,15 @@ document.documentElement.classList.add('js');
 (() => {
   const views = [...document.querySelectorAll('[data-route]')];
   const links = [...document.querySelectorAll('.site-nav a')];
+  const brand = document.querySelector('.brand');
+  const langLinks = [...document.querySelectorAll('.lang-switch a')];
+  const footerTag = document.querySelector('.site-footer__tag');
+  const toTop = document.querySelector('.to-top');
+  const navPt = ["Início","Experiências","Formação","Projetos","Pesquisas","Contato"];
+  const navEn = ["Home","Experiences","Education","Projects","Research","Contact"];
+  const basePaths = ["/","/experiencias","/formacao","/projetos","/pesquisas","/contato"];
+  const tagPt = "Transformando conhecimento em projetos que conectam ciência e tecnologia.";
+  const tagEn = "Turning knowledge into projects that connect science and technology.";
   // #/rota é uma página; #secao pertence à página que contém essa seção
   const anchor = () => (location.hash.length > 1 && !location.hash.startsWith('#/') ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null);
   const routeOf = () => (location.hash.startsWith('#/') ? decodeURIComponent(location.hash.slice(1)).replace(/\/$/, '') || '/' : anchor()?.closest('[data-route]')?.dataset.route ?? null);
@@ -3730,11 +3739,26 @@ document.documentElement.classList.add('js');
     views.forEach((v) => (v.hidden = v !== view));
     document.title = view.dataset.title.replace(/&quot;/g, '"');
     const r = view.dataset.route;
-    links.forEach((a) => {
-      const href = a.getAttribute('href').slice(1);
-      const on = href === '/' ? r === '/' : r === href || r.startsWith(href + '/');
+    const isEn = r === '/en' || r.startsWith('/en/');
+    const base = isEn ? (r.slice(3) || '/') : r;
+    document.documentElement.lang = isEn ? 'en' : 'pt-BR';
+    if (brand) brand.setAttribute('href', isEn ? '#/en' : '#/');
+    links.forEach((a, i) => {
+      const bp = basePaths[i] || '/';
+      const target = isEn ? (bp === '/' ? '/en' : '/en' + bp) : bp;
+      a.setAttribute('href', '#' + target);
+      if (navPt[i] && navEn[i]) a.textContent = isEn ? navEn[i] : navPt[i];
+      const on = bp === '/' ? base === '/' : base === bp || base.startsWith(bp + '/');
       on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current');
     });
+    langLinks.forEach((a) => {
+      const isEnBtn = a.getAttribute('hreflang') === 'en';
+      const target = isEnBtn ? (base === '/' ? '/en' : '/en' + base) : base;
+      a.setAttribute('href', '#' + target);
+      (isEnBtn === isEn) ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current');
+    });
+    if (footerTag) footerTag.innerHTML = isEn ? tagEn : tagPt;
+    if (toTop && toTop.firstChild?.nodeType === 3) toTop.firstChild.nodeValue = (isEn ? 'Back to top' : 'Voltar ao topo') + ' ';
     view.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-visible'));
     if (scroll) {
       scrollTo({ top: 0, behavior: 'instant' });
